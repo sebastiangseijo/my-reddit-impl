@@ -4,19 +4,19 @@ import { Field, Int, ObjectType } from "type-graphql";
 @ObjectType()
 @Entity()
 export class Post {
-  @Field(() => Int)
+  @Field()
   @PrimaryKey()
   id!: number;
 
-  @Field(() => String)
+  @Field()
   @Property({ type: "date" })
   createdAt = new Date();
 
-  @Field(() => String)
+  @Field()
   @Property({ type: "date", onUpdate: () => new Date() })
   updatedAt = new Date();
 
-  @Field(() => String)
+  @Field()
   @Property({ type: "text" })
   title!: string;
 }
