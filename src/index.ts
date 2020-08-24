@@ -1,9 +1,10 @@
-import { MikroORM } from "@mikro-orm/core";
-import microConfig from "./mikro-orm.config";
+import "reflect-metadata";
 import express from "express";
-import { ApolloServer } from "apollo-server-express";
+import { MikroORM } from "@mikro-orm/core";
 import { buildSchema } from "type-graphql";
+import microConfig from "./mikro-orm.config";
 import { PostResolver } from "./resolvers/Post";
+import { ApolloServer } from "apollo-server-express";
 
 const main = async () => {
   const app = express();
