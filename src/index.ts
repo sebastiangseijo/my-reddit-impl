@@ -1,13 +1,15 @@
 import { MikroORM } from "@mikro-orm/core";
-import {__db_name__, __db_type__, __prod__} from "./constants";
+import { Post } from "./entities/Post";
+import microConfig from "./mikro-orm.config";
 
 const main = async () => {
-  const orm = await MikroORM.init({
-    entities: [],
-    dbName: __db_name__,
-    debug: __prod__,
-    type: __db_type__,
-  });
+  const orm = await MikroORM.init(microConfig);
+
+  const post = orm.em.create(Post, { title: "my first post" });
+  await orm.em.persistAndFlush(post);
+  await orm.em.nativeInsert(Post, { title: " my first post x2" });
 };
 
-main();
+main().catch((err) => {
+  console.error(err);
+});
