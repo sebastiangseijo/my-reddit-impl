@@ -5,6 +5,7 @@ import { buildSchema } from "type-graphql";
 import microConfig from "./mikro-orm.config";
 import { PostResolver } from "./resolvers/Post";
 import { ApolloServer } from "apollo-server-express";
+import { UserResolver } from "./resolvers/user";
 
 const main = async () => {
   const app = express();
@@ -12,7 +13,7 @@ const main = async () => {
   await orm.getMigrator().up();
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [PostResolver],
+      resolvers: [PostResolver, UserResolver],
       validate: false,
     }),
     context: () => ({
